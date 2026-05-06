@@ -16,3 +16,15 @@ CREATE TABLE public."ToolLog" (
     FOREIGN KEY (checked_by)
     REFERENCES public."User"(user_id)
 );
+
+CREATE TABLE public."FaultReport" (
+    fault_id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    fault_type varchar(100) NOT NULL,
+    location varchar(255) NOT NULL,
+    severity varchar(50) NOT NULL,
+    status varchar(50) NOT NULL,
+    notes text,
+    marker_pattern varchar(50),
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);

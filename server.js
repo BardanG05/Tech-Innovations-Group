@@ -1,30 +1,31 @@
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
 const toolLogRoutes = require("./routes/toolLog");
+const faultRoutes = require("./routes/faults");
+const userRoutes = require("./routes/users");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(toolLogRoutes);
+app.use(faultRoutes);
+app.use(userRoutes);
 
-//checking server health
-app.get("/", (req, res) => {
-  res.send("Railway maintenance backend API is running");
-});
+app.use(express.static(path.join(__dirname, "static")));
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-//GET faults data 
-app.get("/api/faults", async (req, res) => {
+app.get("/api/users", async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM "FaultReport"');
+    const result = await pool.query('SELECT * FROM "User" ORDER BY user_id');
     res.json(result.rows);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ error: "Internal error getting data from faults" });
+    res.status(500).json({ error: "Internal error getting data from user" });
   }
 });
 
@@ -32,15 +33,4 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
-
-// GET user access
-app.get("/api/users", async (req, res) => {
-  try{
-    const result = await pool.query('SELECT * FROM "User"');
-    res.json(result.rows);
-  } catch(err) {
-    console.error(err.message);
-    res.status(500).json({error: "Internal error getting data from user "})
-  }
 });
