@@ -1,0 +1,121 @@
+fault_id,date_reported,location,asset_area,fault_type,severity,status,tool_required,shift,weather_condition,asset_age_days,asset_usage_hours,risk_score,days_to_resolve,ar_marker_id,assigned_engineer
+F001,2026-04-10 00:00:00,Platform 2,Station,Mechanical,Medium,Open,Inspection Camera,Afternoon,Dry,172,1779,50,,AR marker M01,Engineer A
+F002,2026-03-14 00:00:00,Signal Box B,Signal,Sensor,Medium,Closed,Multimeter,Afternoon,Dry,763,6973,95,5,AR marker M03,Engineer D
+F003,2026-03-22 00:00:00,Tunnel Section T1,Tunnel,Electrical,Low,Closed,Insulated Screwdriver,Afternoon,Windy,134,1619,42,1,AR marker M05,Engineer A
+F004,2026-04-16 00:00:00,Track Segment 7,Track,Sensor,Low,Closed,Laptop Diagnostic Kit,Night,Dry,110,4903,48,4,AR marker M01,Engineer B
+F005,2026-04-19 00:00:00,Tunnel Section T1,Tunnel,Mechanical,High,Closed,Torque Wrench,Morning,Cold,419,4654,100,10,AR marker M06,Engineer B
+F006,2026-04-12 00:00:00,Tunnel Section T1,Tunnel,Mechanical,Medium,Open,Torque Wrench,Afternoon,Cold,776,4110,85,,AR marker M11,Engineer E
+F007,2026-03-15 00:00:00,Power Cabinet,Electrical Room,Structural,High,Closed,Crack Gauge,Morning,Rain,264,625,80,8,AR marker M10,Engineer C
+F008,2026-03-14 00:00:00,Power Cabinet,Electrical Room,Signalling,Medium,Closed,Signal Tester,Night,Windy,499,2440,78,3,AR marker M09,Engineer C
+F009,2026-04-17 00:00:00,Train Brake Unit,Train,Signalling,High,In Progress,Multimeter,Morning,Dry,254,2366,94,,AR marker M02,Engineer B
+F010,2026-04-10 00:00:00,Signal Box A,Signal,Signalling,Medium,In Progress,Multimeter,Night,Dry,640,7768,100,,AR marker M11,Engineer A
+F011,2026-04-13 00:00:00,Train Door Unit,Train,Structural,Medium,In Progress,Crack Gauge,Morning,Cold,330,7223,82,,AR marker M09,Engineer B
+F012,2026-04-02 00:00:00,Platform 2,Station,Structural,High,Closed,Drill,Night,Dry,233,2604,87,6,AR marker M10,Engineer C
+F013,2026-04-01 00:00:00,Platform 1,Station,Mechanical,High,Closed,Spanner,Night,Dry,881,5138,100,5,AR marker M02,Engineer D
+F014,2026-04-22 00:00:00,Platform 2,Station,Sensor,Medium,Open,Multimeter,Night,Hot,516,2805,72,,AR marker M04,Engineer E
+F015,2026-04-18 00:00:00,Escalator Area,Station,Electrical,Medium,In Progress,Thermal Camera,Afternoon,Dry,717,6218,100,,AR marker M04,Engineer B
+F016,2026-03-05 00:00:00,Tunnel Section T2,Tunnel,Mechanical,Medium,Open,Inspection Camera,Night,Dry,255,217,48,,AR marker M04,Engineer A
+F017,2026-04-27 00:00:00,Platform 1,Station,Structural,Low,Open,Drill,Morning,Windy,715,8053,83,,AR marker M10,Engineer D
+F018,2026-03-16 00:00:00,Track Segment 7,Track,Signalling,Low,Open,Multimeter,Afternoon,Dry,471,5904,75,,AR marker M11,Engineer A
+F019,2026-03-04 00:00:00,Track Segment 4,Track,Structural,High,Open,Inspection Camera,Afternoon,Rain,226,3216,91,,AR marker M05,Engineer D
+F020,2026-03-16 00:00:00,Platform 2,Station,Signalling,High,Closed,Signal Tester,Morning,Hot,130,928,68,5,AR marker M08,Engineer D
+F021,2026-03-14 00:00:00,Track Segment 4,Track,Mechanical,Low,Open,Torque Wrench,Afternoon,Windy,429,4445,63,,AR marker M11,Engineer D
+F022,2026-03-10 00:00:00,Signal Box B,Signal,Structural,Low,Open,Drill,Afternoon,Dry,783,8983,84,,AR marker M01,Engineer E
+F023,2026-03-31 00:00:00,Train Door Unit,Train,Sensor,Low,Closed,Laptop Diagnostic Kit,Night,Rain,112,3144,33,4,AR marker M07,Engineer A
+F024,2026-04-30 00:00:00,Train Brake Unit,Train,Electrical,Medium,Open,Insulated Screwdriver,Afternoon,Rain,113,6968,81,,AR marker M11,Engineer C
+F025,2026-03-16 00:00:00,Tunnel Section T1,Tunnel,Signalling,Low,Closed,Multimeter,Night,Windy,498,5280,63,1,AR marker M02,Engineer A
+F026,2026-04-04 00:00:00,Signal Box B,Signal,Sensor,Low,Closed,Laptop Diagnostic Kit,Afternoon,Windy,100,4102,45,2,AR marker M12,Engineer C
+F027,2026-04-09 00:00:00,Power Cabinet,Electrical Room,Sensor,Low,Closed,Laptop Diagnostic Kit,Morning,Windy,336,1797,40,2,AR marker M03,Engineer C
+F028,2026-03-19 00:00:00,Train Brake Unit,Train,Electrical,Medium,Open,Insulated Screwdriver,Afternoon,Dry,679,4425,95,,AR marker M02,Engineer D
+F029,2026-04-23 00:00:00,Tunnel Section T1,Tunnel,Mechanical,Low,Closed,Torque Wrench,Night,Hot,682,4391,64,5,AR marker M09,Engineer A
+F030,2026-03-08 00:00:00,Platform 2,Station,Electrical,Medium,Closed,Multimeter,Afternoon,Cold,626,2526,84,3,AR marker M01,Engineer C
+F031,2026-03-14 00:00:00,Power Cabinet,Electrical Room,Electrical,Medium,In Progress,Multimeter,Morning,Rain,603,6758,88,,AR marker M07,Engineer A
+F032,2026-03-12 00:00:00,Escalator Area,Station,Structural,Medium,In Progress,Inspection Camera,Night,Dry,715,4165,90,,AR marker M07,Engineer A
+F033,2026-04-24 00:00:00,Track Segment 7,Track,Electrical,Low,Closed,Multimeter,Night,Rain,388,5100,59,1,AR marker M07,Engineer C
+F034,2026-03-18 00:00:00,Platform 2,Station,Structural,Medium,Closed,Inspection Camera,Afternoon,Rain,725,8885,100,2,AR marker M10,Engineer C
+F035,2026-03-03 00:00:00,Platform 2,Station,Sensor,Medium,Closed,Calibration Tool,Night,Rain,351,7249,89,2,AR marker M05,Engineer A
+F036,2026-04-15 00:00:00,Track Segment 4,Track,Mechanical,Medium,Closed,Spanner,Night,Cold,733,3328,87,5,AR marker M10,Engineer C
+F037,2026-04-12 00:00:00,Platform 2,Station,Structural,Medium,Closed,Inspection Camera,Morning,Hot,364,6692,85,6,AR marker M11,Engineer D
+F038,2026-04-13 00:00:00,Escalator Area,Station,Electrical,Medium,In Progress,Insulated Screwdriver,Morning,Hot,591,106,70,,AR marker M10,Engineer E
+F039,2026-04-11 00:00:00,Tunnel Section T2,Tunnel,Signalling,Medium,Closed,Signal Tester,Afternoon,Windy,553,7852,95,7,AR marker M11,Engineer E
+F040,2026-03-22 00:00:00,Platform 2,Station,Electrical,Medium,Open,Multimeter,Morning,Hot,233,2514,55,,AR marker M10,Engineer A
+F041,2026-03-30 00:00:00,Track Segment 4,Track,Sensor,Low,Closed,Multimeter,Night,Dry,536,6647,67,1,AR marker M02,Engineer D
+F042,2026-03-15 00:00:00,Signal Box A,Signal,Sensor,Medium,Closed,Calibration Tool,Night,Windy,898,2088,91,3,AR marker M09,Engineer E
+F043,2026-03-21 00:00:00,Track Segment 7,Track,Sensor,High,Closed,Calibration Tool,Afternoon,Cold,466,7405,100,10,AR marker M04,Engineer C
+F044,2026-04-19 00:00:00,Train Door Unit,Train,Signalling,Medium,In Progress,Multimeter,Afternoon,Cold,109,4781,69,,AR marker M09,Engineer A
+F045,2026-03-09 00:00:00,Signal Box A,Signal,Electrical,Medium,Open,Insulated Screwdriver,Afternoon,Windy,249,1152,64,,AR marker M08,Engineer D
+F046,2026-03-04 00:00:00,Signal Box B,Signal,Signalling,Medium,Closed,Signal Tester,Afternoon,Cold,742,420,85,5,AR marker M07,Engineer D
+F047,2026-04-04 00:00:00,Escalator Area,Station,Sensor,Medium,Closed,Calibration Tool,Morning,Hot,529,3695,76,5,AR marker M06,Engineer D
+F048,2026-04-16 00:00:00,Signal Box A,Signal,Signalling,High,Closed,Laptop Diagnostic Kit,Night,Dry,576,541,96,9,AR marker M02,Engineer D
+F049,2026-03-09 00:00:00,Track Segment 7,Track,Electrical,Low,In Progress,Insulated Screwdriver,Afternoon,Cold,246,7549,65,,AR marker M07,Engineer C
+F050,2026-04-23 00:00:00,Platform 2,Station,Signalling,Low,Closed,Signal Tester,Morning,Rain,388,3773,54,5,AR marker M04,Engineer A
+F051,2026-04-09 00:00:00,Signal Box A,Signal,Electrical,Low,Closed,Insulated Screwdriver,Afternoon,Rain,607,3671,70,5,AR marker M10,Engineer E
+F052,2026-04-17 00:00:00,Escalator Area,Station,Mechanical,Medium,Open,Torque Wrench,Night,Hot,348,1871,56,,AR marker M07,Engineer B
+F053,2026-03-05 00:00:00,Train Brake Unit,Train,Electrical,Low,Closed,Thermal Camera,Afternoon,Cold,900,2083,63,2,AR marker M02,Engineer E
+F054,2026-04-11 00:00:00,Tunnel Section T2,Tunnel,Mechanical,High,Closed,Torque Wrench,Night,Rain,138,7202,94,10,AR marker M07,Engineer B
+F055,2026-04-16 00:00:00,Train Door Unit,Train,Structural,Medium,Closed,Drill,Night,Cold,823,8021,100,5,AR marker M06,Engineer B
+F056,2026-04-23 00:00:00,Platform 2,Station,Structural,High,Open,Inspection Camera,Afternoon,Cold,505,6309,100,,AR marker M03,Engineer D
+F057,2026-03-14 00:00:00,Tunnel Section T2,Tunnel,Structural,Low,Closed,Inspection Camera,Morning,Rain,748,4626,67,4,AR marker M12,Engineer D
+F058,2026-04-01 00:00:00,Train Door Unit,Train,Electrical,Medium,Closed,Insulated Screwdriver,Morning,Hot,532,7442,84,2,AR marker M12,Engineer B
+F059,2026-03-20 00:00:00,Power Cabinet,Electrical Room,Sensor,Medium,Closed,Multimeter,Afternoon,Cold,382,7071,83,4,AR marker M05,Engineer C
+F060,2026-03-15 00:00:00,Platform 2,Station,Electrical,Low,Closed,Thermal Camera,Afternoon,Cold,810,3133,68,1,AR marker M12,Engineer E
+F061,2026-04-18 00:00:00,Train Door Unit,Train,Sensor,Low,Open,Calibration Tool,Morning,Cold,228,4953,49,,AR marker M01,Engineer E
+F062,2026-03-09 00:00:00,Tunnel Section T1,Tunnel,Mechanical,High,Closed,Spanner,Night,Cold,744,2168,100,5,AR marker M08,Engineer D
+F063,2026-03-29 00:00:00,Tunnel Section T2,Tunnel,Electrical,High,In Progress,Insulated Screwdriver,Afternoon,Dry,519,1969,85,,AR marker M10,Engineer A
+F064,2026-03-10 00:00:00,Signal Box A,Signal,Sensor,High,Open,Multimeter,Night,Windy,284,2040,84,,AR marker M04,Engineer E
+F065,2026-03-25 00:00:00,Track Segment 7,Track,Signalling,Low,Closed,Laptop Diagnostic Kit,Morning,Rain,469,5103,60,4,AR marker M11,Engineer B
+F066,2026-03-17 00:00:00,Power Cabinet,Electrical Room,Mechanical,Low,Open,Torque Wrench,Afternoon,Windy,106,2664,31,,AR marker M08,Engineer C
+F067,2026-03-03 00:00:00,Signal Box B,Signal,Structural,Medium,Closed,Drill,Night,Rain,494,1266,70,4,AR marker M07,Engineer A
+F068,2026-04-04 00:00:00,Signal Box B,Signal,Electrical,High,Closed,Thermal Camera,Night,Windy,103,1077,68,7,AR marker M05,Engineer D
+F069,2026-03-08 00:00:00,Track Segment 7,Track,Structural,Medium,Closed,Inspection Camera,Night,Dry,542,8947,100,5,AR marker M07,Engineer C
+F070,2026-04-08 00:00:00,Tunnel Section T1,Tunnel,Mechanical,Low,Closed,Spanner,Morning,Hot,886,439,62,4,AR marker M09,Engineer D
+F071,2026-04-28 00:00:00,Tunnel Section T1,Tunnel,Electrical,High,In Progress,Insulated Screwdriver,Afternoon,Hot,863,8156,100,,AR marker M06,Engineer C
+F072,2026-04-12 00:00:00,Platform 2,Station,Electrical,Low,Closed,Multimeter,Afternoon,Cold,325,6661,56,3,AR marker M06,Engineer A
+F073,2026-04-19 00:00:00,Track Segment 4,Track,Sensor,High,Open,Laptop Diagnostic Kit,Morning,Windy,585,7669,100,,AR marker M06,Engineer E
+F074,2026-04-18 00:00:00,Track Segment 7,Track,Signalling,Medium,Open,Multimeter,Night,Hot,592,2246,82,,AR marker M02,Engineer A
+F075,2026-04-10 00:00:00,Train Brake Unit,Train,Electrical,Medium,In Progress,Multimeter,Morning,Hot,44,6784,64,,AR marker M02,Engineer B
+F076,2026-04-01 00:00:00,Escalator Area,Station,Structural,Medium,In Progress,Inspection Camera,Afternoon,Windy,884,8005,100,,AR marker M03,Engineer D
+F077,2026-03-13 00:00:00,Train Brake Unit,Train,Sensor,Medium,Open,Calibration Tool,Night,Cold,101,4626,67,,AR marker M01,Engineer C
+F078,2026-04-16 00:00:00,Tunnel Section T1,Tunnel,Sensor,Medium,Closed,Calibration Tool,Night,Windy,182,7416,82,4,AR marker M07,Engineer D
+F079,2026-04-29 00:00:00,Tunnel Section T2,Tunnel,Electrical,High,Open,Multimeter,Afternoon,Hot,422,3926,98,,AR marker M12,Engineer D
+F080,2026-03-25 00:00:00,Power Cabinet,Electrical Room,Electrical,Medium,Open,Insulated Screwdriver,Morning,Windy,544,5539,81,,AR marker M08,Engineer A
+F081,2026-04-16 00:00:00,Signal Box A,Signal,Signalling,High,Closed,Laptop Diagnostic Kit,Night,Hot,106,7792,98,7,AR marker M11,Engineer A
+F082,2026-04-24 00:00:00,Tunnel Section T2,Tunnel,Sensor,Medium,In Progress,Multimeter,Morning,Rain,765,8094,93,,AR marker M11,Engineer C
+F083,2026-03-15 00:00:00,Escalator Area,Station,Mechanical,Medium,Open,Spanner,Night,Cold,678,1746,82,,AR marker M01,Engineer A
+F084,2026-03-21 00:00:00,Platform 1,Station,Structural,Medium,In Progress,Drill,Night,Rain,280,8802,93,,AR marker M03,Engineer B
+F085,2026-03-06 00:00:00,Train Brake Unit,Train,Signalling,Medium,Open,Multimeter,Night,Cold,627,2444,82,,AR marker M08,Engineer C
+F086,2026-04-12 00:00:00,Platform 1,Station,Signalling,High,Closed,Laptop Diagnostic Kit,Afternoon,Hot,191,1310,86,7,AR marker M12,Engineer C
+F087,2026-03-30 00:00:00,Tunnel Section T1,Tunnel,Electrical,High,Closed,Insulated Screwdriver,Night,Cold,139,3986,86,9,AR marker M12,Engineer C
+F088,2026-03-02 00:00:00,Power Cabinet,Electrical Room,Signalling,Low,Closed,Signal Tester,Night,Cold,732,903,71,2,AR marker M04,Engineer B
+F089,2026-04-09 00:00:00,Tunnel Section T1,Tunnel,Electrical,Medium,Closed,Multimeter,Night,Cold,691,745,77,5,AR marker M12,Engineer B
+F090,2026-03-06 00:00:00,Tunnel Section T1,Tunnel,Structural,Medium,Open,Drill,Night,Cold,165,8937,87,,AR marker M03,Engineer C
+F091,2026-04-28 00:00:00,Track Segment 7,Track,Structural,Medium,In Progress,Inspection Camera,Morning,Hot,147,7773,73,,AR marker M09,Engineer C
+F092,2026-03-06 00:00:00,Track Segment 4,Track,Mechanical,Low,Open,Inspection Camera,Afternoon,Dry,407,4395,60,,AR marker M11,Engineer B
+F093,2026-03-31 00:00:00,Platform 1,Station,Sensor,High,Closed,Calibration Tool,Night,Cold,654,3726,93,10,AR marker M11,Engineer D
+F094,2026-03-08 00:00:00,Signal Box A,Signal,Mechanical,High,In Progress,Spanner,Night,Rain,534,2002,85,,AR marker M07,Engineer D
+F095,2026-03-24 00:00:00,Power Cabinet,Electrical Room,Sensor,Medium,Closed,Multimeter,Afternoon,Cold,188,6897,68,5,AR marker M01,Engineer C
+F096,2026-03-14 00:00:00,Track Segment 7,Track,Signalling,High,Closed,Multimeter,Afternoon,Rain,131,6118,96,5,AR marker M02,Engineer D
+F097,2026-03-06 00:00:00,Power Cabinet,Electrical Room,Electrical,Medium,Closed,Multimeter,Night,Rain,51,928,53,3,AR marker M02,Engineer E
+F098,2026-03-14 00:00:00,Train Brake Unit,Train,Electrical,High,Open,Insulated Screwdriver,Morning,Rain,822,2517,97,,AR marker M09,Engineer C
+F099,2026-04-21 00:00:00,Signal Box A,Signal,Mechanical,Medium,Open,Inspection Camera,Afternoon,Dry,45,5969,64,,AR marker M03,Engineer C
+F100,2026-03-04 00:00:00,Signal Box A,Signal,Signalling,Medium,Closed,Laptop Diagnostic Kit,Morning,Hot,517,7444,98,6,AR marker M09,Engineer B
+F101,2026-04-30 00:00:00,Train Brake Unit,Train,Mechanical,Medium,Closed,Inspection Camera,Morning,Dry,704,8643,100,5,AR marker M08,Engineer D
+F102,2026-03-28 00:00:00,Power Cabinet,Electrical Room,Mechanical,Medium,Closed,Spanner,Morning,Rain,105,1423,54,6,AR marker M05,Engineer E
+F103,2026-04-10 00:00:00,Train Brake Unit,Train,Sensor,Medium,In Progress,Calibration Tool,Night,Windy,641,8792,98,,AR marker M07,Engineer A
+F104,2026-04-20 00:00:00,Escalator Area,Station,Mechanical,High,Closed,Spanner,Afternoon,Cold,817,3622,100,8,AR marker M08,Engineer D
+F105,2026-03-27 00:00:00,Escalator Area,Station,Mechanical,Low,In Progress,Inspection Camera,Afternoon,Dry,291,6232,54,,AR marker M02,Engineer A
+F106,2026-03-06 00:00:00,Track Segment 4,Track,Mechanical,Medium,In Progress,Inspection Camera,Morning,Hot,163,1082,56,,AR marker M06,Engineer D
+F107,2026-04-25 00:00:00,Escalator Area,Station,Mechanical,High,Closed,Spanner,Night,Hot,390,1797,91,6,AR marker M04,Engineer A
+F108,2026-03-23 00:00:00,Train Door Unit,Train,Structural,Low,In Progress,Drill,Night,Cold,261,7130,56,,AR marker M01,Engineer B
+F109,2026-03-18 00:00:00,Escalator Area,Station,Structural,High,In Progress,Inspection Camera,Morning,Dry,215,2447,86,,AR marker M02,Engineer E
+F110,2026-03-14 00:00:00,Track Segment 4,Track,Signalling,Medium,Open,Signal Tester,Morning,Rain,349,5414,76,,AR marker M10,Engineer A
+F111,2026-04-13 00:00:00,Platform 2,Station,Structural,Medium,In Progress,Crack Gauge,Morning,Windy,651,7342,100,,AR marker M02,Engineer C
+F112,2026-03-28 00:00:00,Platform 2,Station,Structural,Medium,Closed,Crack Gauge,Night,Dry,569,5153,80,3,AR marker M01,Engineer B
+F113,2026-03-20 00:00:00,Signal Box B,Signal,Electrical,Medium,In Progress,Thermal Camera,Afternoon,Rain,152,226,59,,AR marker M03,Engineer D
+F114,2026-04-04 00:00:00,Escalator Area,Station,Electrical,Medium,Closed,Thermal Camera,Morning,Hot,855,5902,93,5,AR marker M01,Engineer D
+F115,2026-04-28 00:00:00,Platform 2,Station,Structural,Medium,Closed,Crack Gauge,Morning,Cold,756,6943,100,2,AR marker M03,Engineer E
+F116,2026-03-30 00:00:00,Escalator Area,Station,Structural,Low,Closed,Inspection Camera,Afternoon,Cold,279,7238,69,4,AR marker M12,Engineer C
+F117,2026-03-15 00:00:00,Tunnel Section T2,Tunnel,Electrical,Low,Closed,Insulated Screwdriver,Night,Rain,573,8455,77,2,AR marker M04,Engineer A
+F118,2026-03-10 00:00:00,Tunnel Section T1,Tunnel,Electrical,Low,Open,Thermal Camera,Afternoon,Hot,807,1334,61,,AR marker M10,Engineer E
+F119,2026-03-29 00:00:00,Power Cabinet,Electrical Room,Sensor,Medium,Closed,Laptop Diagnostic Kit,Afternoon,Hot,360,5279,70,5,AR marker M11,Engineer C
+F120,2026-04-20 00:00:00,Tunnel Section T1,Tunnel,Sensor,Low,Closed,Laptop Diagnostic Kit,Afternoon,Cold,347,7665,70,1,AR marker M02,Engineer A
