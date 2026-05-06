@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AR Maintenance — Field view</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/ar.css" />
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.7/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body>
+    <div class="ar-shell">
+      <div class="ar-top">
+        <a href="index.html">Back to dashboard</a>
+        <button type="button" id="ar-refresh">Refresh data</button>
+      </div>
+      <div id="ar-status" aria-live="polite">Point a Hiro or Kanji marker at the camera.</div>
+      <div id="ar-overlay" hidden>
+        <h3 id="ar-overlay-title">Fault</h3>
+        <p id="ar-overlay-line1"></p>
+        <p id="ar-overlay-line2"></p>
+      </div>
+
+      <a-scene
+        embedded
+        vr-mode-ui="enabled: false"
+        renderer="logarithmicDepthBuffer: true; colorManagement: true;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+      >
+        <a-marker preset="hiro" id="marker-hiro" emit-events="true">
+          <a-box position="0 0.25 0" scale="0.15 0.15 0.15" material="color: #3d9cf9; opacity: 0.85; transparent: true"></a-box>
+        </a-marker>
+        <a-marker preset="kanji" id="marker-kanji" emit-events="true">
+          <a-box position="0 0.25 0" scale="0.15 0.15 0.15" material="color: #5ee1a8; opacity: 0.85; transparent: true"></a-box>
+        </a-marker>
+        <a-entity camera></a-entity>
+      </a-scene>
+    </div>
+
+    <script type="module" src="js/ar.js"></script>
+  </body>
+</html>

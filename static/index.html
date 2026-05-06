@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AR Maintenance — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <div id="toasts" aria-live="polite" aria-relevant="additions"></div>
+    <div class="shell" id="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand__title">AR-Enhanced Maintenance Support</div>
+          <div class="brand__sub">Faults, tools, and field AR view</div>
+        </div>
+        <div class="topbar__actions">
+          <a class="btn btn--primary" id="link-ar" href="ar.html">Open AR view</a>
+        </div>
+      </header>
+
+      <div id="global-error" class="banner" role="alert" hidden></div>
+
+      <section id="login-section" class="panel">
+        <h2 class="panel__title">Sign in</h2>
+        <p class="hint">
+          The API has no auth token yet; pick a staff member from the database to simulate a session.
+        </p>
+        <div class="field-row">
+          <div class="field">
+            <label for="user-select">Staff</label>
+            <select id="user-select"></select>
+          </div>
+          <button type="button" class="btn btn--primary" id="login-btn">Continue</button>
+        </div>
+        <div class="field" style="margin-top: 1rem">
+          <label for="api-base-input">API base URL</label>
+          <div class="field-row">
+            <input id="api-base-input" type="url" autocomplete="off" placeholder="http://localhost:3000" />
+            <button type="button" class="btn" id="save-api-base">Save</button>
+          </div>
+          <p class="hint">Defaults to this origin when served from Express. Override if the API runs elsewhere.</p>
+        </div>
+      </section>
+
+      <section id="app-section" class="grid grid--2" hidden>
+        <div>
+          <div class="panel">
+            <div class="field-row" style="justify-content: space-between; margin-bottom: 0.75rem">
+              <h2 class="panel__title" style="margin: 0">Faults</h2>
+              <div style="display: flex; gap: 0.5rem">
+                <button type="button" class="btn" id="refresh-btn">Refresh</button>
+                <button type="button" class="btn btn--primary" id="add-fault-btn">Add fault</button>
+              </div>
+            </div>
+            <p class="hint" id="session-label"></p>
+            <div id="faults-list" class="faults"></div>
+          </div>
+        </div>
+        <div>
+          <div class="panel">
+            <h2 class="panel__title">Tool tracking</h2>
+            <p class="hint">Each check-in/out appends a log row (current backend). Status uses the same string field.</p>
+            <form id="tool-form">
+              <div class="field">
+                <label for="tool-name">Tool name</label>
+                <input id="tool-name" name="tool_name" required maxlength="255" />
+              </div>
+              <div class="field">
+                <label for="tool-id">Tool ID (optional)</label>
+                <input id="tool-id" name="tool_id" maxlength="50" />
+              </div>
+              <div class="field">
+                <label for="tool-status">Status</label>
+                <select id="tool-status" name="status_review">
+                  <option>Available</option>
+                  <option>In use</option>
+                  <option>Checked Out</option>
+                  <option>Missing</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn--primary">Submit tool log</button>
+            </form>
+          </div>
+          <div class="panel">
+            <div class="field-row" style="justify-content: space-between; margin-bottom: 0.5rem">
+              <h2 class="panel__title" style="margin: 0">Recent tool logs</h2>
+            </div>
+            <div class="table-wrap">
+              <table id="tools-list">
+                <thead>
+                  <tr>
+                    <th>Tool</th>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Status</th>
+                    <th>When</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel">
+            <button type="button" class="btn btn--ghost" id="logout-btn">Sign out</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <dialog id="fault-dialog" aria-labelledby="fault-form-title">
+      <form id="fault-form" class="dialog-body">
+        <h2 id="fault-form-title" class="panel__title">Fault</h2>
+        <input type="hidden" id="fault-id" name="fault_id" value="" />
+        <div class="field">
+          <label for="fault-type">Fault type</label>
+          <input id="fault-type" name="fault_type" required maxlength="100" />
+        </div>
+        <div class="field">
+          <label for="fault-location">Location</label>
+          <input id="fault-location" name="location" required maxlength="255" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="fault-severity">Severity</label>
+            <select id="fault-severity" name="severity">
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+              <option>Critical</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fault-status">Status</label>
+            <select id="fault-status" name="status">
+              <option>Open</option>
+              <option>In progress</option>
+              <option>Resolved</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fault-notes">Notes / comments</label>
+          <textarea id="fault-notes" name="notes" rows="3" maxlength="4000"></textarea>
+        </div>
+        <div class="field">
+          <label for="fault-marker">AR marker preset</label>
+          <select id="fault-marker" name="marker_pattern">
+            <option value="">None</option>
+            <option value="hiro">hiro</option>
+            <option value="kanji">kanji</option>
+          </select>
+          <p class="hint">Print the matching AR.js pattern marker for demos.</p>
+        </div>
+      </form>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn--ghost" id="fault-cancel" value="cancel">Cancel</button>
+        <button type="submit" class="btn btn--primary" form="fault-form">Save</button>
+      </div>
+    </dialog>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
