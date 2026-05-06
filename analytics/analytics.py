@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-df = pd.read_csv("../data/maintenance_dataset.csv")
+df = pd.read_csv("data/maintenance_dataset.csv")
 
 df["date_reported"] = pd.to_datetime(df["date_reported"])
 
