@@ -1,18 +1,22 @@
 {
   "name": "tech-innovations-group",
   "version": "1.0.0",
-  "description": "Railway station AR maintenance support system — Express API and static frontend",
+  "description": "Railway station AR maintenance support system — Express API, static frontend, and PostgreSQL schema",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BardanG05/Tech-Innovations-Group.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "pg": "^8.13.1"

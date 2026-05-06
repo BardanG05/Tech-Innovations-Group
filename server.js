@@ -4,12 +4,14 @@ const cors = require("cors");
 const pool = require("./db");
 const toolLogRoutes = require("./routes/toolLog");
 const faultRoutes = require("./routes/faults");
+const userRoutes = require("./routes/users");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(toolLogRoutes);
 app.use(faultRoutes);
+app.use(userRoutes);
 
 app.use(express.static(path.join(__dirname, "static")));
 
