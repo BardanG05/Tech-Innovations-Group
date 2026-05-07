@@ -70,6 +70,27 @@ export async function apiFetch(path, init = {}) {
   return null;
 }
 
+/**
+ * Login without sending an existing Bearer token.
+ * @param {{ user_name: string, password: string }} body
+ */
+export async function postLogin(body) {
+  const url = `${config.API_BASE_URL}/api/login`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const text = await res.text();
+  const data = text ? JSON.parse(text) : null;
+  if (!res.ok) {
+    const err = new Error((data && data.error) || res.statusText);
+    err.status = res.status;
+    throw err;
+  }
+  return data;
+}
+
 export function getHealth() {
   return apiFetch("/health");
 }
@@ -109,4 +130,19 @@ export function patchFault(id, body) {
  */
 export function createToolLog(body) {
   return apiFetch("/api/tool-logs", { method: "POST", body: JSON.stringify(body) });
+}
+
+export function getAnalytics() {
+  return apiFetch("/api/analytics");
+}
+
+export function getAuditEvents() {
+  return apiFetch("/api/audit-events");
+}
+
+/**
+ * @param {{ severity?: string, weather_condition?: string, asset_area?: string }} body
+ */
+export function postPredictRisk(body) {
+  return apiFetch("/api/predict-risk", { method: "POST", body: JSON.stringify(body) });
 }

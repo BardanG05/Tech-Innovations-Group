@@ -21,6 +21,7 @@
           <div class="brand__sub">Faults, tools, and field AR view</div>
         </div>
         <div class="topbar__actions">
+          <a class="btn" href="dashboard.html">Analytics dashboard</a>
           <a class="btn btn--primary" id="link-ar" href="ar.html">Open AR view</a>
         </div>
       </header>
@@ -30,15 +31,20 @@
       <section id="login-section" class="panel">
         <h2 class="panel__title">Sign in</h2>
         <p class="hint">
-          The API has no auth token yet; pick a staff member from the database to simulate a session.
+          Pick staff, enter the demo password, and sign in to obtain a JWT stored in session storage for API calls.
         </p>
         <div class="field-row">
           <div class="field">
             <label for="user-select">Staff</label>
             <select id="user-select"></select>
           </div>
-          <button type="button" class="btn btn--primary" id="login-btn">Continue</button>
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input id="login-password" type="password" autocomplete="current-password" placeholder="Demo: password" />
+          </div>
+          <button type="button" class="btn btn--primary" id="login-btn">Sign in</button>
         </div>
+        <p class="hint">All demo accounts use password <strong>password</strong>.</p>
         <div class="field" style="margin-top: 1rem">
           <label for="api-base-input">API base URL</label>
           <div class="field-row">
@@ -148,6 +154,26 @@
         <div class="field">
           <label for="fault-notes">Notes / comments</label>
           <textarea id="fault-notes" name="notes" rows="3" maxlength="4000"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="fault-risk">Risk score (0–10)</label>
+            <input id="fault-risk" name="risk_score" type="number" min="0" max="10" step="0.1" value="5" />
+          </div>
+          <div class="field">
+            <label for="fault-weather">Weather</label>
+            <input id="fault-weather" name="weather_condition" maxlength="60" placeholder="Rain, Clear, …" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="fault-area">Asset area</label>
+            <input id="fault-area" name="asset_area" maxlength="120" placeholder="Tunnel Section, …" />
+          </div>
+          <div class="field">
+            <label for="fault-engineer">Assigned engineer</label>
+            <input id="fault-engineer" name="assigned_engineer" maxlength="120" />
+          </div>
         </div>
         <div class="field">
           <label for="fault-marker">AR marker preset</label>

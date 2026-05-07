@@ -28,6 +28,17 @@ function canManageFaults(u) {
 async function refreshAll(ui) {
   state.setLastError(null);
   ui.showGlobalError(null);
+  const hasAuth = Boolean(state.getSession() && state.loadAuthToken());
+
+  if (!hasAuth) {
+    state.setFaults([]);
+    state.setToolLogs([]);
+    renderSession(ui);
+    renderFaultsList(ui);
+    renderToolsList(ui);
+    fillUserSelect(ui);
+    return;
+  }
 
   if (config.USE_MOCK_FAULT_API) {
     state.setFaults(state.getMockFaults());
@@ -36,6 +47,18 @@ async function refreshAll(ui) {
       const faults = await api.getFaults();
       state.setFaults(faults);
     } catch (e) {
+      if (e instanceof Error && /** @type {any} */ (e).status === 401) {
+        state.setAuthToken(null);
+        state.setSession(null);
+        state.setFaults([]);
+        state.setToolLogs([]);
+        toast("Session expired. Sign in again.", "err");
+        renderSession(ui);
+        renderFaultsList(ui);
+        renderToolsList(ui);
+        fillUserSelect(ui);
+        return;
+      }
       const msg = e instanceof Error ? e.message : String(e);
       state.setFaults(state.getMockFaults());
       state.setLastError(msg);
@@ -51,6 +74,16 @@ async function refreshAll(ui) {
     state.setUsers(users);
     state.setToolLogs(logs);
   } catch (e) {
+    if (e instanceof Error && /** @type {any} */ (e).status === 401) {
+      state.setAuthToken(null);
+      state.setSession(null);
+      state.setToolLogs([]);
+      toast("Session expired. Sign in again.", "err");
+      renderSession(ui);
+      renderToolsList(ui);
+      fillUserSelect(ui);
+      return;
+    }
     const msg = e instanceof Error ? e.message : String(e);
     toast(msg, "err");
   }
@@ -121,6 +154,10 @@ function openFaultDialog(ui, faultId) {
       ui.els.faultStatus.value = String(r.status ?? "Open");
       ui.els.faultNotes.value = String(r.notes ?? "");
       ui.els.faultMarker.value = String(r.marker_pattern ?? "");
+      if (ui.els.faultRisk) ui.els.faultRisk.value = String(r.risk_score ?? "5");
+      if (ui.els.faultWeather) ui.els.faultWeather.value = String(r.weather_condition ?? "");
+      if (ui.els.faultArea) ui.els.faultArea.value = String(r.asset_area ?? "");
+      if (ui.els.faultEngineer) ui.els.faultEngineer.value = String(r.assigned_engineer ?? "");
     }
   } else {
     ui.els.faultForm.reset();
@@ -128,6 +165,10 @@ function openFaultDialog(ui, faultId) {
     ui.els.faultSeverity.value = "Medium";
     ui.els.faultStatus.value = "Open";
     ui.els.faultMarker.value = "hiro";
+    if (ui.els.faultRisk) ui.els.faultRisk.value = "5";
+    if (ui.els.faultWeather) ui.els.faultWeather.value = "";
+    if (ui.els.faultArea) ui.els.faultArea.value = "";
+    if (ui.els.faultEngineer) ui.els.faultEngineer.value = "";
   }
   dlg.showModal();
 }
@@ -145,6 +186,22 @@ function wireFaultForm(ui) {
       notes: ui.els.faultNotes.value.trim(),
       marker_pattern: ui.els.faultMarker.value.trim() || null,
     };
+    if (ui.els.faultRisk) {
+      const rs = Number(ui.els.faultRisk.value);
+      if (Number.isFinite(rs)) payload.risk_score = rs;
+    }
+    if (ui.els.faultWeather) {
+      const w = ui.els.faultWeather.value.trim();
+      if (w) payload.weather_condition = w;
+    }
+    if (ui.els.faultArea) {
+      const a = ui.els.faultArea.value.trim();
+      if (a) payload.asset_area = a;
+    }
+    if (ui.els.faultEngineer) {
+      const e = ui.els.faultEngineer.value.trim();
+      if (e) payload.assigned_engineer = e;
+    }
 
     if (!payload.fault_type || !payload.location) {
       toast("Fault type and location are required.", "err");
@@ -212,13 +269,27 @@ function wireLogin(ui) {
       return;
     }
     const r = /** @type {Record<string, unknown>} */ (u);
-    state.setSession({
-      user_id: Number(r.user_id),
-      user_name: String(r.user_name),
-      user_role: String(r.user_role),
-    });
-    toast(`Signed in as ${r.user_name}`, "ok");
-    await refreshAll(ui);
+    const password = ui.els.loginPassword?.value || "";
+    if (!password) {
+      toast("Enter password (demo: password).", "err");
+      return;
+    }
+    try {
+      const data = await api.postLogin({
+        user_name: String(r.user_name),
+        password,
+      });
+      if (data && data.token) state.setAuthToken(data.token);
+      state.setSession({
+        user_id: Number(r.user_id),
+        user_name: String(r.user_name),
+        user_role: String(r.user_role),
+      });
+      toast(`Signed in as ${r.user_name}`, "ok");
+      await refreshAll(ui);
+    } catch (e) {
+      toast(e instanceof Error ? e.message : String(e), "err");
+    }
   });
 
   ui.els.logoutBtn.addEventListener("click", () => {
