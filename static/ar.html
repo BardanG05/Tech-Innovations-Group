@@ -17,14 +17,36 @@
   <body>
     <div class="ar-shell">
       <div class="ar-top">
-        <a href="index.html">Back to dashboard</a>
+        <a href="index.html">Operations</a>
+        <a href="dashboard.html">Analytics</a>
         <button type="button" id="ar-refresh">Refresh data</button>
       </div>
-      <div id="ar-status" aria-live="polite">Point a Hiro or Kanji marker at the camera.</div>
+      <div id="ar-status" aria-live="polite">
+        Hiro: fault overlay + field actions. Kanji: tool accountability. Sign in on Operations first for API writes.
+      </div>
       <div id="ar-overlay" hidden>
         <h3 id="ar-overlay-title">Fault</h3>
         <p id="ar-overlay-line1"></p>
         <p id="ar-overlay-line2"></p>
+        <p id="ar-overlay-line3" class="ar-overlay__tools"></p>
+
+        <div id="ar-fault-actions" class="ar-actions" hidden>
+          <label for="ar-note">Field note (appended)</label>
+          <textarea id="ar-note" rows="2" placeholder="Inspection finding…"></textarea>
+          <div class="ar-actions__row">
+            <button type="button" id="ar-append-note">Save note</button>
+            <button type="button" id="ar-verify">Mark field verified</button>
+          </div>
+          <p id="ar-action-status" class="ar-action-status" aria-live="polite"></p>
+        </div>
+
+        <div id="ar-tool-actions" class="ar-actions" hidden>
+          <label for="ar-tool-name">Tool name</label>
+          <input id="ar-tool-name" type="text" placeholder="e.g. Torque wrench" maxlength="255" />
+          <div class="ar-actions__row">
+            <button type="button" id="ar-tool-log">Log check-out (AR)</button>
+          </div>
+        </div>
       </div>
 
       <a-scene

@@ -21,14 +21,37 @@ export function getSession() {
   return session;
 }
 
+const TOKEN_KEY = "AR_MAINT_TOKEN";
+
 /** @param {SessionUser | null} u */
 export function setSession(u) {
   session = u;
   try {
     if (u) localStorage.setItem(SESSION_KEY, JSON.stringify(u));
-    else localStorage.removeItem(SESSION_KEY);
+    else {
+      localStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem(TOKEN_KEY);
+    }
   } catch {
     /* ignore */
+  }
+}
+
+/** @param {string | null} token */
+export function setAuthToken(token) {
+  try {
+    if (token) sessionStorage.setItem(TOKEN_KEY, token);
+    else sessionStorage.removeItem(TOKEN_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+export function loadAuthToken() {
+  try {
+    return sessionStorage.getItem(TOKEN_KEY);
+  } catch {
+    return null;
   }
 }
 
@@ -38,6 +61,11 @@ export function loadSessionFromStorage() {
     if (!raw) return null;
     const u = JSON.parse(raw);
     if (u && typeof u.user_id === "number" && typeof u.user_name === "string") {
+      if (!loadAuthToken()) {
+        localStorage.removeItem(SESSION_KEY);
+        session = null;
+        return null;
+      }
       session = u;
       return session;
     }

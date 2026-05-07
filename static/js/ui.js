@@ -8,6 +8,7 @@ export function createDashboardUi(root, toast) {
     loginSection: /** @type {HTMLElement} */ (root.querySelector("#login-section")),
     appSection: /** @type {HTMLElement} */ (root.querySelector("#app-section")),
     userSelect: /** @type {HTMLSelectElement} */ (root.querySelector("#user-select")),
+    loginPassword: /** @type {HTMLInputElement | null} */ (root.querySelector("#login-password")),
     loginBtn: /** @type {HTMLButtonElement} */ (root.querySelector("#login-btn")),
     logoutBtn: /** @type {HTMLButtonElement} */ (root.querySelector("#logout-btn")),
     sessionLabel: /** @type {HTMLElement} */ (root.querySelector("#session-label")),
@@ -28,6 +29,10 @@ export function createDashboardUi(root, toast) {
     faultStatus: /** @type {HTMLSelectElement} */ (root.querySelector("#fault-status")),
     faultNotes: /** @type {HTMLTextAreaElement} */ (root.querySelector("#fault-notes")),
     faultMarker: /** @type {HTMLSelectElement} */ (root.querySelector("#fault-marker")),
+    faultRisk: /** @type {HTMLInputElement | null} */ (root.querySelector("#fault-risk")),
+    faultWeather: /** @type {HTMLInputElement | null} */ (root.querySelector("#fault-weather")),
+    faultArea: /** @type {HTMLInputElement | null} */ (root.querySelector("#fault-area")),
+    faultEngineer: /** @type {HTMLInputElement | null} */ (root.querySelector("#fault-engineer")),
     faultCancel: /** @type {HTMLButtonElement} */ (root.querySelector("#fault-cancel")),
     toolForm: /** @type {HTMLFormElement} */ (root.querySelector("#tool-form")),
     toolName: /** @type {HTMLInputElement} */ (root.querySelector("#tool-name")),
@@ -74,6 +79,9 @@ export function renderFaultCard(row, onEdit) {
   const st = String(r.status ?? "");
   const notes = String(r.notes ?? "");
   const marker = String(r.marker_pattern ?? "");
+  const risk = r.risk_score != null ? String(r.risk_score) : "";
+  const area = String(r.asset_area ?? "");
+  const weather = String(r.weather_condition ?? "");
 
   const card = document.createElement("article");
   card.className = `fault-card ${severityClass(sev)}`;
@@ -106,6 +114,25 @@ export function renderFaultCard(row, onEdit) {
   sevSpan.textContent = sev;
   pSev.appendChild(sevSpan);
 
+  let pRisk = null;
+  if (risk) {
+    pRisk = document.createElement("p");
+    pRisk.className = "fault-card__meta";
+    pRisk.appendChild(document.createElement("strong")).textContent = "Risk";
+    pRisk.appendChild(document.createTextNode(" "));
+    const rs = document.createElement("span");
+    rs.textContent = risk;
+    pRisk.appendChild(rs);
+  }
+  let pCtx = null;
+  if (area || weather) {
+    pCtx = document.createElement("p");
+    pCtx.className = "fault-card__meta";
+    pCtx.appendChild(document.createElement("strong")).textContent = "Context";
+    pCtx.appendChild(document.createTextNode(" "));
+    pCtx.appendChild(document.createTextNode([area, weather].filter(Boolean).join(" · ") || "—"));
+  }
+
   const pNotes = document.createElement("p");
   pNotes.className = "fault-card__notes";
   pNotes.textContent = notes ? notes : "No notes yet.";
@@ -130,7 +157,11 @@ export function renderFaultCard(row, onEdit) {
   });
   foot.appendChild(btn);
 
-  card.append(head, pLoc, pSev, pNotes, pAr, foot);
+  const block = [head, pLoc, pSev];
+  if (pRisk) block.push(pRisk);
+  if (pCtx) block.push(pCtx);
+  block.push(pNotes, pAr, foot);
+  card.append(...block);
   return card;
 }
 

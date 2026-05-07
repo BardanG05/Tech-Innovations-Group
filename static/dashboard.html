@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AR Maintenance — Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="dash-root">
+      <aside class="dash-nav" aria-label="Primary">
+        <div class="dash-nav__brand">
+          <span aria-hidden="true">◆</span> AR Maintenance
+        </div>
+        <a class="dash-nav__link dash-nav__link--active" href="dashboard.html">Dashboard</a>
+        <a class="dash-nav__link" href="index.html">Operations</a>
+        <a class="dash-nav__link" href="ar.html">Field AR</a>
+        <a class="dash-nav__link" href="#predictive">Predictive insights</a>
+      </aside>
+      <div class="dash-main">
+        <header class="dash-header">
+          <div>
+            <h1 class="dash-title">Maintenance intelligence</h1>
+            <p class="dash-sub">KPIs, distribution charts, and risk trend from live <code>FaultReport</code> data.</p>
+          </div>
+          <div class="dash-header__actions">
+            <span class="muted" style="font-size: 0.85rem">Range: last 30 days (trend uses all dated rows)</span>
+            <a class="btn" href="index.html">Export / edit faults →</a>
+          </div>
+        </header>
+
+        <div id="dash-banner" class="dash-banner" role="alert" hidden></div>
+
+        <section class="panel" style="margin-bottom: 1rem">
+          <label for="dash-api-base">API base URL</label>
+          <div class="field-row">
+            <input id="dash-api-base" type="url" style="flex: 1" />
+            <button type="button" class="btn btn--primary" id="dash-save-api">Save &amp; reload</button>
+          </div>
+        </section>
+
+        <section class="dash-kpis" aria-label="Key performance indicators">
+          <div class="dash-kpi">
+            <div class="dash-kpi__label">Avg risk score</div>
+            <div class="dash-kpi__value" id="kpi-risk">—</div>
+            <div class="dash-kpi__hint" id="kpi-risk-hint"></div>
+            <canvas id="spark-risk" width="160" height="36" aria-hidden="true"></canvas>
+          </div>
+          <div class="dash-kpi">
+            <div class="dash-kpi__label">Open faults</div>
+            <div class="dash-kpi__value" id="kpi-open">—</div>
+            <div class="dash-kpi__hint" id="kpi-open-hint"></div>
+            <canvas id="spark-open" width="160" height="36" aria-hidden="true"></canvas>
+          </div>
+          <div class="dash-kpi">
+            <div class="dash-kpi__label">Most common fault</div>
+            <div class="dash-kpi__value" id="kpi-common" style="font-size: 1rem">—</div>
+            <canvas id="spark-common" width="160" height="36" aria-hidden="true"></canvas>
+          </div>
+          <div class="dash-kpi">
+            <div class="dash-kpi__label">Avg resolution (days)</div>
+            <div class="dash-kpi__value" id="kpi-res">—</div>
+            <canvas id="spark-res" width="160" height="36" aria-hidden="true"></canvas>
+          </div>
+          <div class="dash-kpi">
+            <div class="dash-kpi__label">Rolling risk (last 20)</div>
+            <div class="dash-kpi__value" id="kpi-pred">—</div>
+            <div class="dash-kpi__hint" id="kpi-pred-hint"></div>
+            <canvas id="spark-pred" width="160" height="36" aria-hidden="true"></canvas>
+          </div>
+        </section>
+
+        <div class="dash-grid dash-grid--3">
+          <div class="dash-panel">
+            <h3>Faults by weather</h3>
+            <div class="dash-chart-wrap">
+              <canvas id="chart-weather"></canvas>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <h3>Faults by status</h3>
+            <div class="dash-chart-wrap">
+              <canvas id="chart-status"></canvas>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <h3>Average risk by area</h3>
+            <div class="dash-chart-wrap">
+              <canvas id="chart-risk-area"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-grid dash-grid--2" style="margin-top: 0.85rem">
+          <div class="dash-panel">
+            <h3>Fault count by asset area</h3>
+            <div class="dash-chart-wrap dash-chart-wrap--tall">
+              <canvas id="chart-fault-area"></canvas>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <h3>Risk trend over time</h3>
+            <div class="dash-chart-wrap dash-chart-wrap--tall">
+              <canvas id="chart-trend"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <section class="dash-panel" style="margin-top: 0.85rem">
+          <h3>Recent high-risk faults</h3>
+          <div style="overflow-x: auto">
+            <table class="dash-table" id="dash-risk-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Type</th>
+                  <th>Location</th>
+                  <th>Risk</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="predictive" class="dash-predict">
+          <h3>Predictive insights (sklearn Ridge)</h3>
+          <p class="hint" style="margin: 0 0 0.75rem">
+            Trained offline on <code>data/maintenance_dataset.csv</code>; weights in
+            <code>analytics/model_weights.json</code>. Inputs are categorical only (TRL 3 demo).
+          </p>
+          <div class="field-row" style="flex-wrap: wrap; gap: 0.5rem">
+            <div class="field">
+              <label for="pred-severity">Severity</label>
+              <select id="pred-severity">
+                <option>Low</option>
+                <option selected>Medium</option>
+                <option>High</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="pred-weather">Weather</label>
+              <input id="pred-weather" type="text" value="Dry" />
+            </div>
+            <div class="field">
+              <label for="pred-area">Asset area</label>
+              <input id="pred-area" type="text" value="Station" />
+            </div>
+            <button type="button" class="btn btn--primary" id="dash-predict-btn" style="align-self: flex-end">
+              Predict risk
+            </button>
+          </div>
+          <p id="pred-out" class="hint" style="margin-top: 0.5rem"></p>
+        </section>
+
+        <footer class="dash-footer" aria-label="Summary tiles">
+          <div class="dash-foot">
+            <strong>High-risk area</strong>
+            <div id="foot-high">—</div>
+          </div>
+          <div class="dash-foot">
+            <strong>Engineers (field est.)</strong>
+            <div id="foot-eng">—</div>
+          </div>
+          <div class="dash-foot">
+            <strong>Scheduled tasks</strong>
+            <div id="foot-tasks">—</div>
+          </div>
+          <div class="dash-foot">
+            <strong>Reports / audits</strong>
+            <div id="foot-reports">—</div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script type="module" src="js/dashboard.js"></script>
+  </body>
+</html>

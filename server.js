@@ -1,79 +1,64 @@
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
-
-const pool = require("./db");
-
-// Route files
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const { requireJwt } = require("./middleware/requireJwt");
+const authRoutes = require("./routes/auth");
 const toolLogRoutes = require("./routes/toolLog");
-<<<<<<< HEAD
 const faultRoutes = require("./routes/faults");
+const analyticsRoutes = require("./routes/analytics");
+const predictRoutes = require("./routes/predict");
 const userRoutes = require("./routes/users");
-=======
-const dashboardRoutes = require("./routes/dashboard");
 
->>>>>>> d046d4a (Update backend role access and dashboard routes)
 const app = express();
 
-// Middleware
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
+);
 app.use(cors());
-app.use(express.json());
-<<<<<<< HEAD
-app.use(toolLogRoutes);
-app.use(faultRoutes);
-app.use(userRoutes);
+app.use(express.json({ limit: "200kb" }));
 
-app.use(express.static(path.join(__dirname, "static")));
-=======
-
-// Route files
-app.use(toolLogRoutes);
-app.use(dashboardRoutes);
-
-// Checking server health
-app.get("/", (req, res) => {
-  res.send("Railway maintenance backend API is running");
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 600,
+  standardHeaders: true,
+  legacyHeaders: false,
 });
->>>>>>> d046d4a (Update backend role access and dashboard routes)
+app.use(generalLimiter);
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 40,
+  message: { error: "Too many login attempts" },
+});
+
+function selectiveJwt(req, res, next) {
+  const url = (req.originalUrl || "").split("?")[0];
+  if (!url.startsWith("/api/")) return next();
+  if (req.method === "POST" && url === "/api/login") return next();
+  if (req.method === "GET" && url === "/api/users") return next();
+  return requireJwt(req, res, next);
+}
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-<<<<<<< HEAD
-app.get("/api/users", async (req, res) => {
-=======
-// GET faults data
-app.get("/api/faults", async (req, res) => {
->>>>>>> d046d4a (Update backend role access and dashboard routes)
-  try {
-    const result = await pool.query('SELECT * FROM "User" ORDER BY user_id');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ error: "Internal error getting data from user" });
-  }
-});
+app.use("/api", loginLimiter, authRoutes);
+app.use(selectiveJwt);
+app.use(toolLogRoutes);
+app.use(faultRoutes);
+app.use(analyticsRoutes);
+app.use(predictRoutes);
+app.use(userRoutes);
 
-// GET user access
-app.get("/api/users", async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM "User"');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ error: "Internal error getting data from users" });
-  }
-});
+app.use(express.static(path.join(__dirname, "static")));
 
-// Start server last
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> d046d4a (Update backend role access and dashboard routes)
