@@ -13,7 +13,7 @@ from matplotlib.gridspec import GridSpec
 df = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/maintenance_dataset.csv"))
 
 # ── Config ────────────────────────────────────────────────────────────────────
-# Hlaksjdnwd wjdnadwadj ahwdajdajhdwwad 
+
 CSV_PATH   = "data/maintenance_dataset.csv"
 OUTPUT_DIR = "graphs"
 
