@@ -14,8 +14,8 @@ df = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/maintenance_da
 
 # ── Config ────────────────────────────────────────────────────────────────────
 # Hlaksjdnwd wjdnadwadj ahwdajdajhdwwad 
-CSV_PATH   = "../data/maintenance_dataset.csv"
-OUTPUT_DIR = "../graphs"
+CSV_PATH   = "data/maintenance_dataset.csv"
+OUTPUT_DIR = "graphs"
 
 COLORS = {
     "Dry":        "#378ADD",
